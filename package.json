@@ -1,0 +1,32 @@
+{
+  "name": "next-logs",
+  "version": "1.0.0",
+  "description": "lightning fast, local server and client side logger for NextJS, NodeJS and JS Applications and Servers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LarvenLLC/next-logs.git"
+  },
+  "keywords": [
+    "Next",
+    "JS",
+    "React",
+    "JS",
+    "Node",
+    "JS",
+    "Logger",
+    "Logging",
+    "Logs",
+    "JSON",
+    "Text"
+  ],
+  "author": "BossBele",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LarvenLLC/next-logs/issues"
+  },
+  "homepage": "https://github.com/LarvenLLC/next-logs#readme"
+}
