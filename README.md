@@ -16,7 +16,7 @@ Or
 yarn add next-logs
 ```
 
-![Demo Video](/example/public/react-custom-checkbox.gif)
+![Logs Screenshot](/Screenshot.png)
 
 ## Usage
 
@@ -25,7 +25,7 @@ yarn add next-logs
 // /pages/api/logger/[log].js
 import {NextLogs} from "next-logs";
 
-export default NextLogs();
+export default NextLogs;
 ```
 
 ### 1. Client Side
