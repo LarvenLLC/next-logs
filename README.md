@@ -20,96 +20,90 @@ yarn add next-logs
 
 ## Usage
 
+### 1. Add API
 ```jsx
 // /pages/api/logger/[log].js
-import React from "react";
-import * as Icon from "react-icons/fi";
-import Checkbox from "react-custom-checkbox";
+import {NextLogs} from "next-logs";
 
-const MyComponent = () => {
-  return (
-    <>
-      <h4>Default:</h4>
-      <Checkbox />
-      <h4>Using Custom Icon:</h4>
-      <Checkbox
-        icon={<Icon.FiCheck color="#174A41" size={14} />}
-        name="my-input"
-        checked={true}
-        onChange={(value, event) => {
-          let p = {
-            isTrue: value,
-          };
-          console.log(event);
-          return alert(value);
-        }}
-        borderColor="#D7C629"
-        style={{ cursor: "pointer" }}
-        labelStyle={{ marginLeft: 5, userSelect: "none" }}
-        label="Have you started using it?"
-      />
-      <h4>Using Image Icon:</h4>
-      <Checkbox
-        checked={true}
-        icon={<img src={require("./check.png")} style={{ width: 24 }} alt="" />}
-        borderColor="#D7C629"
-        borderRadius={10}
-        size={18}
-        label="Get em!"
-      />
-      <h4>More Styling:</h4>
-      <Checkbox
-        checked={true}
-        icon={
-          <div
-            style={{
-              display: "flex",
-              flex: 1,
-              backgroundColor: "#174A41",
-              alignSelf: "stretch",
-            }}
-          >
-            <Icon.FiCheck color="white" size={20} />
-          </div>
-        }
-        borderColor="#174A41"
-        // borderWidth={0}
-        borderRadius={20}
-        style={{ overflow: "hidden" }}
-        size={20}
-        label="Coooool right?"
-      />
-    </>
-  );
-};
-
-export default MyComponent;
+export default NextLogs();
 ```
 
-## Props
+### 1. Client Side
+```jsx
+// /pages/*.js
+import log from "next-logs";
 
-| Prop               |                  Explanation                  |  Data Type   |                            (Sample) Values                             |                                    Default                                    |
-| ------------------ | :-------------------------------------------: | :----------: | :--------------------------------------------------------------------: | :---------------------------------------------------------------------------: |
-| icon               |               custom check icon               | Object (jsx) | \* `<img src={require("./check.png")} style={{ width: 24 }} alt="" />` | `<div style={{ backgroundColor: "#D7C629", borderRadius: 5, padding: 5 }} />` |
-| checked            |               state of checkbox               |     Bool     |                         _ `true`<br/>_ `false`                         |                                    `false`                                    |
-| disabled           |     checkbox input active/inactive state      |     Bool     |                         _ `true`<br/>_ `false`                         |                                    `false`                                    |
-| label              |              checkbox label text              |    String    |                     _ `"Cheese"`<br/>_ `"Lettuce"`                     |                                      ``                                       |
-| onChange           | function triggered when checked state changes |     Func     |    Usage <br/> \* `(checked, event) => console.log(checked, event)`    |                                    `null`                                     |
-| size               |               size of checkbox                |    Number    |                         _ `30`<br/>_ `15`<br/>                         |                                     `18`                                      |
-| right              |             label position right?             |     Bool     |                         _ `true`<br/>_ `false`                         |                                    `false`                                    |
-| name               |              checkbox input name              |    String    |                    _ `"toppings"`<br/>_ `"hobbies"`                    |                                     `""`                                      |
-| value              |             checkbox input value              |    Number    |                     _ `"cheese"`<br/>_ `"lettuce"`                     |                                     `""`                                      |
-| reference          |              checkbox input ref               |     Func     |                _ `checkboxRef`<br/>_ `this.checkboxRef`                |                                      ``                                       |
-| style              |              checkbox css style               |    Object    |                         \* `{margin: 10}`<br/>                         |                                     `{}`                                      |
-| className          |            checkbox css class(es)             |    String    |                   _ `"p-5 mb-3"`<br/>_ `"uk-margin"`                   |                                     `""`                                      |
-| borderColor        |           color of checkbox border            |    String    |                        _ `"red"`<br/>_ `"#fff"`                        |                                  `"#D7C629"`                                  |
-| borderRadius       |           radius of checkbox border           |    Number    |                            _ `10`<br/>_ `0`                            |                                      `5`                                      |
-| borderStyle        |           style of checkbox border            |    Object    |             _ `"solid"`<br/>_ `"dashed"`<br/>\* `"dotted"`             |                                   `"solid"`                                   |
-| borderWidth        |         thickness of checkbox border          |    Number    |                            _ `4`<br/>_ `0`                             |                                      `2`                                      |
-| labelClassName     |           label text css class(es)            |    String    |                   _ `"p-5 mb-3"`<br/>_ `"uk-margin"`                   |                                     `""`                                      |
-| labelStyle         |             label text css style              |    Object    |                           \* `{margin: 10}`                            |                              `{ marginLeft: 5 }`                              |
-| containerClassName |   checkbox & label container css class(es)    |    String    |                   _ `"p-5 mb-3"`<br/>_ `"uk-margin"`                   |                                     `""`                                      |
-| containerStyle     |          checkbox & label css style           |    Object    |                           \* `{margin: 10}`                            |                                     `{}`                                      |
+export default Page() {
+  useEffect(() => {
+    log.info("Created our super logger!", {
+      name: "next-logs"
+    });
+    log.debug("Created our super logger!", {
+      name: "next-logs"
+    });
+    log.warn("Created our super logger!", {
+      name: "next-logs"
+    });
+    log.error("Created our super logger!", {
+      name: "next-logs"
+    });
+  },[]);
+
+  return (
+    <div />
+  )
+};
+```
+
+### 1. Server Side
+```jsx
+// /pages/api/auth.js || /middleware.js
+import {logger} from "next-logs";
+
+async function handler(req, res) {
+  const { method } = req;
+
+  logger.info("Deleting user with attributes:", {
+    id: '1'
+  });
+
+  logger.debug("Deleting user with attributes:", {
+    id: '1'
+  });
+
+  logger.warn("Deleting user with attributes:", {
+    id: '1'
+  });
+
+  logger.error("Deleting user with attributes:", {
+    id: '1'
+  });
+
+  try {
+    switch (method) {
+      case 'DELETE':
+        // delete user
+        break;
+      default:
+        res.setHeader('Allow', ['DELETE']);
+        res.status(405).end(`Method ${method} Not Allowed`);
+    }
+    // send result
+    return res.status(200).json({});
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+}
+```
+
+## logger (server) and log (client) API
+
+| Methods            |                  Explanation                                                                          |
+| ------------------ | :---------------------------------------------------------------------------------------------------: |
+| info               |                     logs the information your program is working as expected.                         |
+| debug              | used to find the reason in case your program is not working as expected or an exception has occurred. |
+| warn               |                   situations that are unexpected, but the code can continue the work                  |
+| error              |                                           Error/failure logs                                          |
 
 ## License
 
