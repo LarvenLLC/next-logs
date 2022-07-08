@@ -4,17 +4,17 @@ export default async function handler(req, res) {
   const {
     method,
     body: {
-      message,
-      attributes,
+      message = "",
+      attributes = {},
     },
-    query: { type }
+    query: { log = 'info' }
   } = req;
 
   try {
     switch (method) {
       case 'POST':
         // log
-        logger.log(message, attributes, type);
+        logger.log(message, attributes, log);
         break;
       default:
         res.setHeader('Allow', ['POST']);
