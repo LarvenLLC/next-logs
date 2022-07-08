@@ -1,5 +1,6 @@
 import logger from './logger';
-import loggerAPI from './api';
+import NextLogs from './api';
+import log from './client';
 
-export default logger;
-export { loggerAPI };
+export default log;
+export { logger, NextLogs };
