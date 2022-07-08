@@ -1,6 +1,8 @@
 import format from './format'
 var fs = require('fs')
 
+const dir = 'logs'
+
 const logFiles = {
   console: 'logs/console.log',
   info: 'logs/info.log',
@@ -12,6 +14,10 @@ const logFiles = {
 const Logger = () => {
   if (!fs || !('createWriteStream' in fs)) {
     return {}
+  }
+  // create logs directory if it doesn't exist
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir)
   }
   return {
     console: new console.Console(
