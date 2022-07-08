@@ -1,6 +1,6 @@
 # next-logs
 
-> A simple and fully customizable React checkbox input component.
+> lightning fast, local server and client side logger for NextJS, NodeJS and JS Applications and Servers.
 
 [![NPM](https://img.shields.io/npm/v/next-logs.svg)](https://www.npmjs.com/package/next-logs) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
