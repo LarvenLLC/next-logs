@@ -1,8 +1,9 @@
 {
   "name": "next-logs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "lightning fast, local server and client side logger for NextJS, NodeJS and JS Applications and Servers",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
