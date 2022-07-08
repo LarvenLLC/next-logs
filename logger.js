@@ -1,4 +1,5 @@
 const fs = require('fs');
+import format from './format';
 
 const logFiles = {
   console: 'logs/console.log',
@@ -28,9 +29,7 @@ const Logger = {
 
 // logs in .log file for simplicity
 function log(message = '', attributes = {}, type = 'info') {
-  const date = new Date();
-  const timestamp = `${date.toISOString().split('T')[0]} ${date.toLocaleTimeString()}`;
-  const msg = `${timestamp} LOGGER.${type.toUpperCase()}: ${message}`;
+  const msg = format(message, type);
   Logger.console.log(msg, attributes);
   Logger[type].log(msg, attributes);
 }
