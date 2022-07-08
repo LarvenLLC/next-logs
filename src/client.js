@@ -2,12 +2,12 @@ async function log(message, attributes, type) {
   const response = await fetch(`/api/logger/${type}`, {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({message, attributes})
-  });
-  return await response.json();
+    body: JSON.stringify({ message, attributes })
+  })
+  return await response.json()
 }
 
 const client = {
@@ -15,6 +15,6 @@ const client = {
   info: (message = '', attributes = {}) => log(message, attributes, 'info'),
   debug: (message = '', attributes = {}) => log(message, attributes, 'debug'),
   warn: (message = '', attributes = {}) => log(message, attributes, 'warn'),
-  error: (message = '', attributes = {}) => log(message, attributes, 'error'),
-};
-export default client;
+  error: (message = '', attributes = {}) => log(message, attributes, 'error')
+}
+export default client
