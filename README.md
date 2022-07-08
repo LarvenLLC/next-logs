@@ -16,6 +16,8 @@ Or
 yarn add next-logs
 ```
 
+### Logs are written under `/logs` in the project directory:
+
 ![Logs Screenshot](/Screenshot.png)
 
 ## Usage
