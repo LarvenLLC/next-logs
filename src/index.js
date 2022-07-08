@@ -5,5 +5,4 @@ import log from './client'
 module.exports = log
 module.exports.logger = logger
 module.exports.NextLogs = NextLogs
-// export { logger, NextLogs }
-// export default log
+// export { logger, NextLogs, log }
