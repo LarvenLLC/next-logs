@@ -23,7 +23,7 @@ export default class Reader {
   }
 
   // reads logs in .log files
-  read(type = 'info') {
+  read(type = 'console') {
     // This line opens the file as a readable stream
     return this.readFile()[type]
   }
