@@ -38,7 +38,7 @@ export default function API(settings = defaultSettings) {
           readStream.on('error', function (err) {
             res.end(err)
           })
-          break
+          return
         }
         case 'POST':
           // log
