@@ -16,18 +16,18 @@ Or
 yarn add next-logs
 ```
 
-### Logs are written under `/logs/` in the project directory:
+### Logs are written under `/tmp/` in the project directory:
 
 ![Logs Screenshot](/Screenshot.png)
 
-## Usage
+## Usage - Logging
 
 ### 1. Add API in `/pages/api/logger/[log].js`
 ```jsx
 // /pages/api/logger/[log].js
 import {NextLogs} from "next-logs";
 
-export default NextLogs;
+export default NextLogs();
 ```
 
 ### 2. Client Side
@@ -97,6 +97,23 @@ async function handler(req, res) {
   }
 }
 ```
+
+## Usage - Monitoring & Debugging
+You can view logs by type through your `domain/api/logger/{type}`. Type of logs include `info`, `debug`, `warn` and `error`.
+You can also build your own log viewers through the same API that returns log text. A next-logs logs dashboard is currently in development.
+
+## Logs directory/location
+By default, logs are saved in the `tmp` directory. Because Vercel and most systems allow saving files under `tmp` directory; hence prevents conflicts that may lead to failures.
+
+This configuration can be edited when initializing `NextLogs` API in the `/pages/api/logger/[log].js` file:
+```jsx
+// /pages/api/logger/[log].js
+import {NextLogs} from "next-logs";
+
+// logs will be saved in the /logs directory
+export default NextLogs({ dir: 'logs' });
+```
+When self-hosting a NextJS project, it is advised to change the logs location from the default `'tmp'` for better control of logs.
 
 ## logger (server) and log (client) API
 
