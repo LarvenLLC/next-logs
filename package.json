@@ -4,7 +4,10 @@
   "description": "lightning fast, local server and client side logger for NextJS, NodeJS and JS Applications and Servers",
   "author": "BossBele",
   "license": "MIT",
-  "repository": "/next-logs",
+  "repository": "LarvenLLC/next-logs",
+  "bugs": {
+    "url": "https://github.com/LarvenLLC/next-logs/issues"
+  },
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
