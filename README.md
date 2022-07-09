@@ -16,13 +16,13 @@ Or
 yarn add next-logs
 ```
 
-### Logs are written under `/logs` in the project directory:
+### Logs are written under `/logs/` in the project directory:
 
 ![Logs Screenshot](/Screenshot.png)
 
 ## Usage
 
-### 1. Add API
+### 1. Add API in `/pages/api/logger/[log].js`
 ```jsx
 // /pages/api/logger/[log].js
 import {NextLogs} from "next-logs";
@@ -30,7 +30,7 @@ import {NextLogs} from "next-logs";
 export default NextLogs;
 ```
 
-### 1. Client Side
+### 2. Client Side
 ```jsx
 // /pages/*.js
 import log from "next-logs";
@@ -57,7 +57,7 @@ export default Page() {
 };
 ```
 
-### 1. Server Side
+### 3. Server Side
 ```jsx
 // /pages/api/auth.js || /middleware.js
 import {logger} from "next-logs";
