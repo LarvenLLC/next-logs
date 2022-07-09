@@ -1,6 +1,6 @@
 {
   "name": "next-logs",
-  "version": "1.1.20",
+  "version": "1.2.0",
   "description": "lightning fast, local server and client side logger for NextJS, NodeJS and JS Applications and Servers",
   "author": "BossBele",
   "license": "MIT",
