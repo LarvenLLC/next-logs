@@ -1,8 +1,8 @@
-import logger from './logger'
-import NextLogs from './api'
+import Logger from './Logger'
+import NextLogs, { config } from './api'
 import log from './client'
 
 module.exports = log
-module.exports.logger = logger
+module.exports.logger = new Logger(config.dir, config.logFiles).logger
 module.exports.NextLogs = NextLogs
 // export { logger, NextLogs, log }
