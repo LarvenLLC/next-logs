@@ -1,65 +1,82 @@
 import format from './format'
+
 var fs = require('fs')
 
-const dir = 'logs'
-
-const logFiles = {
-  console: 'logs/console.log',
-  info: 'logs/info.log',
-  debug: 'logs/debug.log',
-  warn: 'logs/warn.log',
-  error: 'logs/error.log'
-}
-
-const Logger = () => {
-  if (!fs || !('createWriteStream' in fs)) {
-    return {}
+export default class Logger {
+  constructor(dir, logFiles) {
+    this.dir = dir
+    this.logFiles = logFiles
   }
-  // create logs directory if it doesn't exist
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir)
+
+  logFile() {
+    if (!fs || !('createWriteStream' in fs)) {
+      return {}
+    }
+    // create logs directory if it doesn't exist
+    if (!fs.existsSync(this.dir)) {
+      fs.mkdirSync(this.dir)
+    }
+    return {
+      console: new console.Console(
+        fs.createWriteStream(this.logFiles.console, {
+          flags: 'a' // 'a' means appending (old data will be preserved)
+        })
+      ),
+      info: new console.Console(
+        fs.createWriteStream(this.logFiles.info, {
+          flags: 'a' // 'a' means appending (old data will be preserved)
+        })
+      ),
+      debug: new console.Console(
+        fs.createWriteStream(this.logFiles.debug, {
+          flags: 'a' // 'a' means appending (old data will be preserved)
+        })
+      ),
+      warn: new console.Console(
+        fs.createWriteStream(this.logFiles.warn, {
+          flags: 'a' // 'a' means appending (old data will be preserved)
+        })
+      ),
+      error: new console.Console(
+        fs.createWriteStream(this.logFiles.error, {
+          flags: 'a' // 'a' means appending (old data will be preserved)
+        })
+      )
+    }
   }
-  return {
-    console: new console.Console(
-      fs.createWriteStream(logFiles.console, {
-        flags: 'a' // 'a' means appending (old data will be preserved)
-      })
-    ),
-    info: new console.Console(
-      fs.createWriteStream(logFiles.info, {
-        flags: 'a' // 'a' means appending (old data will be preserved)
-      })
-    ),
-    debug: new console.Console(
-      fs.createWriteStream(logFiles.debug, {
-        flags: 'a' // 'a' means appending (old data will be preserved)
-      })
-    ),
-    warn: new console.Console(
-      fs.createWriteStream(logFiles.warn, {
-        flags: 'a' // 'a' means appending (old data will be preserved)
-      })
-    ),
-    error: new console.Console(
-      fs.createWriteStream(logFiles.error, {
-        flags: 'a' // 'a' means appending (old data will be preserved)
-      })
-    )
+
+  // logs in .log file for simplicity
+  log(message = '', attributes = {}, type = 'info') {
+    const msg = format(message, type)
+    this.logFile().console.log(msg, attributes)
+    this.logFile()[type].log(msg, attributes)
+  }
+
+  logger = {
+    log: this.log,
+    info: (message = '', attributes = {}) =>
+      this.log(message, attributes, 'info'),
+    debug: (message = '', attributes = {}) =>
+      this.log(message, attributes, 'debug'),
+    warn: (message = '', attributes = {}) =>
+      this.log(message, attributes, 'warn'),
+    error: (message = '', attributes = {}) =>
+      this.log(message, attributes, 'error')
   }
 }
 
 // logs in .log file for simplicity
-function log(message = '', attributes = {}, type = 'info') {
-  const msg = format(message, type)
-  Logger().console.log(msg, attributes)
-  Logger()[type].log(msg, attributes)
-}
+// function log(message = '', attributes = {}, type = 'info') {
+//   const msg = format(message, type)
+//   Logger().console.log(msg, attributes)
+//   Logger()[type].log(msg, attributes)
+// }
 
-const logger = {
-  log,
-  info: (message = '', attributes = {}) => log(message, attributes, 'info'),
-  debug: (message = '', attributes = {}) => log(message, attributes, 'debug'),
-  warn: (message = '', attributes = {}) => log(message, attributes, 'warn'),
-  error: (message = '', attributes = {}) => log(message, attributes, 'error')
-}
-export default logger
+// const logger = {
+//   log,
+//   info: (message = '', attributes = {}) => log(message, attributes, 'info'),
+//   debug: (message = '', attributes = {}) => log(message, attributes, 'debug'),
+//   warn: (message = '', attributes = {}) => log(message, attributes, 'warn'),
+//   error: (message = '', attributes = {}) => log(message, attributes, 'error')
+// }
+// export default logger
