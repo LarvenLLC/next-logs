@@ -8,6 +8,24 @@
   "bugs": {
     "url": "https://github.com/LarvenLLC/next-logs/issues"
   },
+  "keywords": [
+    "react",
+    "reactjs",
+    "next",
+    "nextjs",
+    "log",
+    "logs",
+    "logger",
+    "logging",
+    "node",
+    "nodejs",
+    "client",
+    "server",
+    "api",
+    "js",
+    "javascript",
+    "larven"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
