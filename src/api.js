@@ -3,7 +3,7 @@ import Logger from './Logger'
 import Reader from './Reader'
 
 const defaultSettings = {
-  dir: 'tmp'
+  dir: '/tmp'
 }
 
 export { config }
