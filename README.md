@@ -103,7 +103,7 @@ You can view logs by type through your `domain/api/logger/{type}`. Type of logs 
 You can also build your own log viewers through the same API that returns log text. A next-logs logs dashboard is currently in development.
 
 ## Logs directory/location
-By default, logs are saved in the `tmp` directory. Because Vercel and most systems allow saving files under `tmp` directory; hence prevents conflicts that may lead to failures.
+By default, logs are saved in the `/tmp` directory. Because Vercel and most systems allow saving files under `/tmp` directory; hence prevents conflicts that may lead to failures.
 
 This configuration can be edited when initializing `NextLogs` API in the `/pages/api/logger/[log].js` file:
 ```jsx
