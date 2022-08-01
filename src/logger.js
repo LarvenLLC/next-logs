@@ -48,6 +48,9 @@ export default class Logger {
   // logs in .log file for simplicity
   log(message = '', attributes = {}, type = 'info') {
     const msg = format(message, type)
+    if (!this.dir) {
+      return
+    }
     this.logFile().console.log(msg, attributes)
     this.logFile()[type].log(msg, attributes)
   }
