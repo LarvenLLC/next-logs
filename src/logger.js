@@ -9,7 +9,7 @@ export default class Logger {
   }
 
   logFile() {
-    if (!fs || !('createWriteStream' in fs)) {
+    if (!fs || !('createWriteStream' in fs) || !this.dir) {
       return {}
     }
     // create logs directory if it doesn't exist
