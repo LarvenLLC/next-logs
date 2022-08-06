@@ -31,6 +31,8 @@ export default NextLogs();
 ```
 
 ### 2. Client Side
+The client side API uses API routes hence it works in both: client and server side.
+
 ```jsx
 // /pages/*.js
 import log from "next-logs";
@@ -58,9 +60,24 @@ export default Page() {
 ```
 
 ### 3. Server Side
+## Setup - Next Config
+Next logs ships with a server side API that makes logging more efficient.
+
+```jsx
+// in your helper function eg. /helper/logger
+import {Logger} from "next-logs";
+
+// Logger API takes in directory as a parameter - defaults to /tmp
+// It is optimal to have the same directory for the client and server side APIs
+// However this API gives you freedom to have different directories for client side and server side logs
+const logger = Logger("logs");
+
+export default logger;
+```
+
 ```jsx
 // /pages/api/auth.js || /middleware.js
-import {logger} from "next-logs";
+import {logger} from "../../helper/logger"; // import from your helper file
 
 async function handler(req, res) {
   const { method } = req;
