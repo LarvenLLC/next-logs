@@ -98,7 +98,31 @@ async function handler(req, res) {
 }
 ```
 
-## Usage - Monitoring & Debugging
+## Setup - Next Config
+Next logs works by using nodeJS functions inside API routes to write and read logs. This functionality is not enabled for Client Side applications. To enable the Client Side APIs to effectively communicate with the nodeJS functions, please install `process` via npm/yarn/pnpm and add this setup in your `next.config.js`:
+
+```js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // ...
+  webpack5: true, // if using webpack 5
+  webpack: (config) => {
+    config.resolve.fallback = {
+      fs: false,
+      path: false,
+      constants: false,
+      process: require.resolve('process/browser'),
+    };
+
+    return config;
+  },
+  // ...
+}
+
+module.exports = nextConfig;
+```
+
+## Monitoring & Debugging
 You can view logs by type through your `domain/api/logger/{type}`. Type of logs include `info`, `debug`, `warn` and `error`.
 You can also build your own log viewers through the same API that returns log text. A next-logs logs dashboard is currently in development.
 
@@ -114,6 +138,9 @@ import {NextLogs} from "next-logs";
 export default NextLogs({ dir: 'logs' });
 ```
 When self-hosting a NextJS project, it is advised to change the logs location from the default `'tmp'` for better control of logs.
+
+## NextJS Middleware
+While using nextJS middleware in API routes, make sure that your middleware does not block requests at `/api/logger/` routes. This may lead to errors and malfunctioning while using `next-logs`.
 
 ## logger (server) and log (client) API
 
