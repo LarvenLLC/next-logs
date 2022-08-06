@@ -60,7 +60,7 @@ function loggerAPI(dir = defaultSettings.dir) {
   const config = new Config()
   config.setDir(dir)
 
-  const logger = new Logger(config.dir, config.logFiles).logger
+  const logger = new Logger(config.dir, config.logFiles)
 
   return logger.logger
 }
