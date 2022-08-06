@@ -6,13 +6,14 @@ const defaultSettings = {
   dir: '/tmp'
 }
 
-export { config }
+let logger = {}
 
 export default function API(settings = defaultSettings) {
   const { dir } = settings
 
   config.setDir(dir)
-  const logger = new Logger(config.dir, config.logFiles)
+
+  logger = new Logger(config.dir, config.logFiles)
   const reader = new Reader(config.dir, config.logFiles)
   return async function handler(req, res) {
     const {
@@ -55,3 +56,6 @@ export default function API(settings = defaultSettings) {
     }
   }
 }
+
+const loggerFunction = logger?.logger
+export { loggerFunction }
