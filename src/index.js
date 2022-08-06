@@ -1,6 +1,6 @@
-import NextLogs, { loggerFunction } from './api'
+import NextLogs, { loggerAPI } from './api'
 import log from './client'
 
 module.exports = log
-module.exports.logger = loggerFunction
+module.exports.Logger = loggerAPI
 module.exports.NextLogs = NextLogs
