@@ -56,7 +56,7 @@ function NextLogs(settings = defaultSettings) {
   }
 }
 
-function loggerAPI(dir) {
+function loggerAPI(dir = defaultSettings.dir) {
   const config = new Config()
   config.setDir(dir)
 
