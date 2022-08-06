@@ -1,4 +1,4 @@
-class Config {
+export default class Config {
   constructor(settings = {}) {
     const { dir = '' } = settings
 
@@ -28,7 +28,3 @@ class Config {
     }
   }
 }
-
-const config = new Config()
-
-export default config
