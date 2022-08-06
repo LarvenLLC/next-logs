@@ -1,4 +1,4 @@
-import config from './Config'
+import Config from './Config'
 import Logger from './Logger'
 import Reader from './Reader'
 
@@ -6,14 +6,13 @@ const defaultSettings = {
   dir: '/tmp'
 }
 
-let logger = {}
-
-export default function API(settings = defaultSettings) {
+function NextLogs(settings = defaultSettings) {
   const { dir } = settings
 
+  const config = new Config()
   config.setDir(dir)
 
-  logger = new Logger(config.dir, config.logFiles)
+  const logger = new Logger(config.dir, config.logFiles)
   const reader = new Reader(config.dir, config.logFiles)
   return async function handler(req, res) {
     const {
@@ -57,5 +56,15 @@ export default function API(settings = defaultSettings) {
   }
 }
 
-const loggerFunction = logger?.logger
-export { loggerFunction }
+function loggerAPI(dir) {
+  const config = new Config()
+  config.setDir(dir)
+
+  const logger = new Logger(config.dir, config.logFiles).logger
+
+  return logger.logger
+}
+
+export default NextLogs
+
+export { loggerAPI }
