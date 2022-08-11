@@ -1,5 +1,7 @@
 build/
 dist/
+/react
+/node
 node_modules/
 .snapshots/
 *.min.js
