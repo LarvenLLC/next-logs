@@ -1,6 +1,3 @@
-import NextLogs, { loggerAPI } from './api'
-import log from './client'
+import NextLogs from './api'
 
-module.exports = log
-module.exports.Logger = loggerAPI
-module.exports.NextLogs = NextLogs
+module.exports = NextLogs
