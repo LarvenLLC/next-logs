@@ -1,4 +1,4 @@
-import format from './format'
+import { format } from './helper'
 
 var fs = require('fs')
 
@@ -51,8 +51,8 @@ export default class Logger {
     if (!this.dir) {
       return
     }
-    this.logFile().console.log(msg, attributes)
-    this.logFile()[type].log(msg, attributes)
+    this.logFile().console.log(msg, JSON.stringify(attributes))
+    this.logFile()[type].log(msg, JSON.stringify(attributes))
   }
 
   logger = {
