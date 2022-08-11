@@ -25,7 +25,7 @@ yarn add next-logs
 ### 1. Add API in `/pages/api/logger/[log].js`
 ```jsx
 // /pages/api/logger/[log].js
-import {NextLogs} from "next-logs";
+import NextLogs from "next-logs";
 
 export default NextLogs();
 ```
@@ -35,7 +35,7 @@ The client side API uses API routes hence it works in both: client and server si
 
 ```jsx
 // /pages/*.js
-import log from "next-logs";
+import log from "next-logs/react";
 
 export default Page() {
   useEffect(() => {
@@ -60,7 +60,6 @@ export default Page() {
 ```
 
 ### 3. Server Side
-## Setup - Next Config
 Next logs ships with a server side API that makes logging more efficient.
 
 ```jsx
@@ -115,30 +114,6 @@ async function handler(req, res) {
 }
 ```
 
-## Setup - Next Config
-Next logs works by using nodeJS functions inside API routes to write and read logs. This functionality is not enabled for Client Side applications. To enable the Client Side APIs to effectively communicate with the nodeJS functions, please install `process` via npm/yarn/pnpm and add this setup in your `next.config.js`:
-
-```js
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  // ...
-  webpack5: true, // if using webpack 5
-  webpack: (config) => {
-    config.resolve.fallback = {
-      fs: false,
-      path: false,
-      constants: false,
-      process: require.resolve('process/browser'),
-    };
-
-    return config;
-  },
-  // ...
-}
-
-module.exports = nextConfig;
-```
-
 ## Monitoring & Debugging
 You can view logs by type through your `domain/api/logger/{type}`. Type of logs include `info`, `debug`, `warn` and `error`.
 You can also build your own log viewers through the same API that returns log text. A next-logs logs dashboard is currently in development.
@@ -149,7 +124,7 @@ By default, logs are saved in the `/tmp` directory. Because Vercel and most syst
 This configuration can be edited when initializing `NextLogs` API in the `/pages/api/logger/[log].js` file:
 ```jsx
 // /pages/api/logger/[log].js
-import {NextLogs} from "next-logs";
+import NextLogs from "next-logs";
 
 // logs will be saved in the /logs directory
 export default NextLogs({ dir: 'logs' });
