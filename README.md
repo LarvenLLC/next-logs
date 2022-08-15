@@ -63,20 +63,8 @@ export default Page() {
 Next logs ships with a server side API that makes logging more efficient.
 
 ```jsx
-// in your helper function eg. /helper/logger
-import {Logger} from "next-logs";
-
-// Logger API takes in directory as a parameter - defaults to /tmp
-// It is optimal to have the same directory for the client and server side APIs
-// However this API gives you freedom to have different directories for client side and server side logs
-const logger = Logger("logs");
-
-export default logger;
-```
-
-```jsx
 // /pages/api/auth.js || /middleware.js
-import {logger} from "../../helper/logger"; // import from your helper file
+import logger from "next-logs/node";
 
 async function handler(req, res) {
   const { method } = req;
@@ -121,13 +109,10 @@ You can also build your own log viewers through the same API that returns log te
 ## Logs directory/location
 By default, logs are saved in the `/tmp` directory. Because Vercel and most systems allow saving files under `/tmp` directory; hence prevents conflicts that may lead to failures.
 
-This configuration can be edited when initializing `NextLogs` API in the `/pages/api/logger/[log].js` file:
-```jsx
-// /pages/api/logger/[log].js
-import NextLogs from "next-logs";
-
-// logs will be saved in the /logs directory
-export default NextLogs({ dir: 'logs' });
+This configuration can be edited using the `LOGGER_DIR` environment variable:
+##### logs will be saved in the `./logs` directory
+```
+LOGGER_DIR=logs
 ```
 When self-hosting a NextJS project, it is advised to change the logs location from the default `'tmp'` for better control of logs.
 
