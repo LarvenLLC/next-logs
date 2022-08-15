@@ -2,7 +2,7 @@ import Config from '../Config'
 import Logger from '../Logger'
 import { defaultSettings } from '../helper'
 
-export default function loggerAPI() {
+function loggerAPI() {
   const { dir } = defaultSettings
 
   const config = new Config()
@@ -12,3 +12,5 @@ export default function loggerAPI() {
 
   return logger.logger
 }
+
+export default loggerAPI()
